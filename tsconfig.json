@@ -5,6 +5,8 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
+    "typeRoots" : ["node_modules/@types"],
+    "downlevelIteration": true,
     "paths": {
       "*": ["node_modules/*"]
     }

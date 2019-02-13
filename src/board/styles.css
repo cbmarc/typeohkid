@@ -1,0 +1,39 @@
+body {
+    background-color: #444;
+    color:#dadada;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 30px); /* Subtract titlebar pixels */
+}
+
+span {
+    font-size: 12em;
+}
+
+span.active {
+    text-align: center;
+    
+    background: linear-gradient(to right, rgb(207, 170, 221) 20%, rgb(5, 172, 255) 40%, rgb(66, 233, 0) 60%, rgb(219, 187, 165) 80%);
+    background-size: 200% auto;
+    
+    color: #000;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+span.done {
+    color:gray;
+}
