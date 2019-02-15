@@ -22,8 +22,8 @@ class BoardRenderer {
 
     onKeyPressed(key: string): void {
         const state: EngineState = this.engine.processInput(key);
-        const previous = this.word.getElementsByTagName("span")[this.engine.activeIndex - 1];
-        const active = this.word.getElementsByTagName("span")[this.engine.activeIndex];
+        const previous = this.word.getElementsByTagName("span")[this.engine.getActiveIndex() - 1];
+        const active = this.word.getElementsByTagName("span")[this.engine.getActiveIndex()];
         if (state == EngineState.INPUT_CORRECT) {
             previous.classList.remove('active');
             previous.classList.add('done');

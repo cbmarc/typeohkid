@@ -11,12 +11,15 @@ export enum EngineState {
 }
 
 export class EngineService {
-    wordList: Word[];
-    word: string;
-    wordIndex: number = 0;
-    activeIndex: number = 0;
-    state: EngineState = EngineState.UNINITIALISED;
+    private wordList: Word[];
+    private word: string;
+    private wordIndex: number = 0;
+    private activeIndex: number = 0;
     private newWordEvent: TypedEvent<NewWordEvent> = new TypedEvent();
+
+    getActiveIndex() {
+        return this.activeIndex;
+    }
 
     loadWords(jsonPath: string) {
         try {
