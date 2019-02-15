@@ -12,6 +12,7 @@ body {
 
 span {
     font-size: 12em;
+    text-transform: uppercase;
 }
 
 span.active {

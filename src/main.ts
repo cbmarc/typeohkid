@@ -15,7 +15,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, "../src/board/index.html"));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {

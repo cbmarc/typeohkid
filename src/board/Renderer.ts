@@ -1,6 +1,7 @@
 import { Titlebar, Color } from 'custom-electron-titlebar';
-import { EngineService, EngineState } from '../services/engine.service';
+import { EngineService, EngineState } from '../services/EngineService';
 import 'mousetrap';
+import { NewWordEvent } from '../model/NewWordEvent';
 
 new Titlebar({
     backgroundColor: Color.fromHex('#444'),
@@ -8,13 +9,14 @@ new Titlebar({
 });
 
 class BoardRenderer {
-    engine: EngineService = new EngineService();
-    word: Element = document.getElementById("word");
-    supportedChars: string = 'abcdefghijklmnopqrstuvwxyz';
-    boundCharacters: string[] = [... this.supportedChars];
-    
+    readonly WORDS_PATH: string = 'resources/words.json';
+
+    private engine: EngineService = new EngineService();
+    private word: Element = document.getElementById("word");
+    private supportedChars: string = 'abcdefghijklmnopqrstuvwxyz';
+    private boundCharacters: string[] = [... this.supportedChars];
+
     constructor() {
-        this.engine.word = "ALEIX";
         this.initialize();
     }
 
@@ -26,9 +28,6 @@ class BoardRenderer {
             previous.classList.remove('active');
             previous.classList.add('done');
             active.classList.add('active');
-        } else if (state == EngineState.WORD_CORRECT) {
-            active.classList.remove('active');
-            active.classList.add('done');
         }
     }
 
@@ -40,10 +39,24 @@ class BoardRenderer {
 
     initialize(): void {
         this.bindKeys();
+        this.engine.loadWords(this.WORDS_PATH);
+        this.engine.onNewWord((newWordEvent: NewWordEvent) => {
+            this.renderWord(newWordEvent.word);
+        });
+        this.engine.newGame();
     }
 
     renderWord(word:string): void {
-
+        this.word.innerHTML = "";
+        const charList: string[] = [... word];
+        charList.forEach((char) => {
+            const span = document.createElement('span');
+            span.innerText = char;
+            this.word.appendChild(span);
+        });
+        if (this.word.children.length > 0) {
+            this.word.children[0].className = "active";
+        }
     }
 }
 export default new BoardRenderer();

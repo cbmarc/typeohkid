@@ -20,6 +20,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@types/node": "^11.9.4",
     "bootstrap": "^4.3.1",
     "custom-electron-titlebar": "^3.0.0",
     "electron": "^4.0.4",
