@@ -1,3 +1,5 @@
+// Got this from https://basarat.gitbooks.io/typescript/docs/tips/typed-event.html
+
 export interface Listener<T> {
     (event: T): any;
   }
@@ -6,7 +8,6 @@ export interface Listener<T> {
     dispose(): void;
   }
   
-  /** passes through events as they happen. You will not get events from before you start listening */
   export class TypedEvent<T> {
     private listeners: Listener<T>[] = [];
     private listenersOncer: Listener<T>[] = [];
@@ -28,10 +29,8 @@ export interface Listener<T> {
     }
   
     emit = (event: T) => {
-      /** Update any general listeners */
       this.listeners.forEach((listener) => listener(event));
   
-      /** Clear the `once` queue */
       this.listenersOncer.forEach((listener) => listener(event));
       this.listenersOncer = [];
     }
